@@ -1,22 +1,26 @@
-const seasidesBtn = document.getElementById("seasidesBtn");
-const flowersBtn = document.getElementById("flowersBtn");
+const blueButton = document.getElementById("blueButton");
+console.log(blueButton);
+const greyButton = document.getElementById("greyButton");
+console.log(greyButton);
 const row = document.getElementById("row");
+console.log(row);
+const apiK = "LUcqh2I7a9khZ240C17ghyu1g2NRNTFejGHX2z5kWxZDFK6nuR2tQUYr";
 
-const fetchImgs = (query) => {
-  fetch(`https://api.pexels.com/v1/search?query=${query}`, { headers: { Authorization: "LUcqh2I7a9khZ240C17ghyu1g2NRNTFejGHX2z5kWxZDFK6nuR2tQUYr" } })
-    .then((resp) => {
-      /* if (!resp.ok) {
-          throw new Error("Link non valido");
-        } else if (resp.status >= 500) {
-          throw new Error("Errore di gestione serve");
-        }
-        throw new Error("Errore nella fetch");
-        } */
-      return resp.json();
+const fetchImages = (query) => {
+  fetch("https://api.pexels.com/v1/search?query=" + query, {
+    headers: {
+      Authorization: apiK,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Errore nella risposta");
+      }
+      return response.json();
     })
-
     .then((data) => {
-        rowContainer.innerHTML = "";
+      row.innerHTML = "";
+
       data.photos.forEach((photo) => {
         const col = document.createElement("div");
         col.className = "col-md-4";
@@ -25,19 +29,22 @@ const fetchImgs = (query) => {
         card.className = "card mb-4 shadow-sm";
 
         const img = document.createElement("img");
-        img.src = photo.src.medium;
         img.className = "bd-placeholder-img card-img-top";
+        img.src = photo.src.medium;
+        img, (alt = photo.alt);
+
+        card.appendChild(img);
 
         const cardBody = document.createElement("div");
         cardBody.className = "card-body";
 
         const title = document.createElement("h5");
-        title.innerText = photo.photographer;
         title.className = "card-title";
+        title.textContent = photo.photographer;
 
         const text = document.createElement("p");
-        text.innerText = "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer";
         text.className = "card-text";
+        text.textContent = photo.alt;
 
         const flex = document.createElement("div");
         flex.className = "d-flex justify-content-between align-items-center";
@@ -51,7 +58,7 @@ const fetchImgs = (query) => {
 
         const editBtn = document.createElement("button");
         editBtn.className = "btn btn-sm btn-outline-secondary";
-editBtn.textContent = "Edit";
+        editBtn.textContent = "Edit";
 
         btnGroup.appendChild(viewBtn);
         btnGroup.appendChild(editBtn);
@@ -72,16 +79,14 @@ editBtn.textContent = "Edit";
 
         col.appendChild(card);
 
-        col.appendChild(row);
+        row.appendChild(col);
       });
     })
-
     .catch((error) => {
-      console.log("Errore di caricamento", error);
+      console.error("Errore durante la fetch:", error);
     });
 };
 
-seasidesBtn.addEventListener("click", () => fetchImgs("seasides"));
+blueButton.addEventListener("click", () => fetchImages("seasides"));
 
-seasidesBtn.addEventListener("click", () => fetchImgs("flowers"));
-*/
+greyButton.addEventListener("click", () => fetchImages("flowers"));
