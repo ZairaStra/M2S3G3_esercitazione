@@ -38,6 +38,15 @@ const fetchImages = (query) => {
         const cardBody = document.createElement("div");
         cardBody.className = "card-body";
 
+        //il titolo deve essere contenuto in un'ancora che lo trasforma in link per essere cliccabile
+        // e rimandare alla pagina dettaglio che cambia al cambiare del link cliccato
+        // tramite l'id della foto estratto col metodo params
+        //const id= new URLSearchParams (window.location.search).get("photoId")
+        //RICORDATI che cambia il link da usare nel nuovo fetch
+        // in documentazione va preso il link per "Get a photo"
+        //"https://api.pexels.com/v1/photos/" + id"
+        //aggiungendogli l'id cercato
+        //nel nuovo fetch va SEMPRE specificata l'autorizzazione
         const title = document.createElement("h5");
         title.className = "card-title";
         title.textContent = photo.photographer;
@@ -63,6 +72,7 @@ const fetchImages = (query) => {
         btnGroup.appendChild(viewBtn);
         btnGroup.appendChild(editBtn);
 
+        //cambiare time con id foto
         const time = document.createElement("small");
         time.className = "text-muted";
         time.innerText = "9mins";
