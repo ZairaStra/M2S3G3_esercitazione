@@ -11,7 +11,68 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./assets/style.css" />
+    <style>
+      .card-img-top {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+      }
+      .jumbotron {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        margin-bottom: 0;
+        background-color: #fff;
+      }
+
+      @media (min-width: 768px) {
+        .jumbotron {
+          padding-top: 6rem;
+          padding-bottom: 6rem;
+        }
+      }
+
+      .jumbotron p:last-child {
+        margin-bottom: 0;
+      }
+
+      .jumbotron-heading {
+        font-weight: 300;
+      }
+
+      .jumbotron .container {
+        max-width: 40rem;
+      }
+
+      footer {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+
+      footer p {
+        margin-bottom: 0.25rem;
+      }
+
+      .navbar .container-fluid {
+        padding-left: 8em;
+        padding-right: 8em;
+      }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -70,14 +131,14 @@
           <h1 class="jumbotron-heading">Album API example</h1>
           <p class="lead text-muted">This page will dynamically load pictures from the web, and display them in a cool way!</p>
           <p>
-            <a href="#" id="blueButton" class="btn btn-primary my-2">Load Images</a>
-            <a href="#" id="greyButton" class="btn btn-secondary my-2">Load Secondary Images</a>
+            <a href="#" id="first-button" class="btn btn-primary my-2">Load Images</a>
+            <a href="#" id="second-button" class="btn btn-secondary my-2">Load Secondary Images</a>
           </p>
         </div>
       </section>
       <div class="album py-5 bg-light">
         <div class="container">
-          <div id="row" class="row">
+          <div id="card-container" class="row">
             <!-- <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
                 <img src="https://picsum.photos/id/237/300/200" class="bd-placeholder-img card-img-top" />
@@ -112,6 +173,6 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
-    <script src="./js/secondscript.js"></script>
+    <script src="./js/another.js"></script>
   </body>
 </html>
