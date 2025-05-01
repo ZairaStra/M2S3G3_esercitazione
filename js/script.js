@@ -4,6 +4,8 @@ const greyButton = document.getElementById("greyButton");
 console.log(greyButton);
 const row = document.getElementById("row");
 console.log(row);
+const inputArea = document.getElementById("inputArea");
+console.log(inputArea);
 const apiK = "LUcqh2I7a9khZ240C17ghyu1g2NRNTFejGHX2z5kWxZDFK6nuR2tQUYr";
 
 const fetchImages = (query) => {
@@ -49,7 +51,7 @@ const fetchImages = (query) => {
         //nel nuovo fetch va SEMPRE specificata l'autorizzazione
         const title = document.createElement("h5");
         title.className = "card-title";
-        title.textContent = photo.photographer;
+        title.innerHTML = `<a href="./details.html?photoId=${photo.id}">${photo.photographer}</a>`;
 
         const text = document.createElement("p");
         text.className = "card-text";
@@ -61,24 +63,57 @@ const fetchImages = (query) => {
         const btnGroup = document.createElement("div");
         btnGroup.className = "btn-group";
 
+        const modalFade = document.createElement("div");
+        modalFade.className = "modal fade";
+
+        const modalDialog = document.createElement("div");
+
+        const modalContent = document.createElement("div");
+
+        const modalBody = document.createElement("div");
+
+        const modalImg = document.createElement("img");
+        modalImg.className = "bd-placeholder-img card-img-top";
+        modalImg.src = photo.src.original;
+        modalImg, (alt = photo.alt);
+
+        modalBody.appendChild(modalImg);
+
+        const modalFooter = document.createElement("div");
+
+        const modalBtn = document.createElement("button");
+        modalBtn.innerText = "Close";
+        modalBtn.className = "btn-close";
+
+        modalFooter.appendChild(modalBtn);
+
+        modalContent.appendChild(modalBody);
+        modalContent.appendChild(modalFooter);
+
+        modalDialog.appendChild(modalContent);
+
+        modalFade.appendChild(modalDialog);
+
         const viewBtn = document.createElement("button");
         viewBtn.className = "btn btn-sm btn-outline-secondary";
+        viewBtn.setAttribute("data-bs-toggle", "modal");
+        viewBtn.setAttribute("data-bs-target", "modalFade");
+
         viewBtn.textContent = "View";
 
         const editBtn = document.createElement("button");
         editBtn.className = "btn btn-sm btn-outline-secondary";
-        editBtn.textContent = "Edit";
+        editBtn.textContent = "Hide";
 
         btnGroup.appendChild(viewBtn);
         btnGroup.appendChild(editBtn);
 
-        //cambiare time con id foto
-        const time = document.createElement("small");
-        time.className = "text-muted";
-        time.innerText = "9mins";
+        const num = document.createElement("small");
+        num.className = "text-muted";
+        num.innerText = photo.id;
 
         flex.appendChild(btnGroup);
-        flex.appendChild(time);
+        flex.appendChild(num);
 
         cardBody.appendChild(title);
         cardBody.appendChild(text);
@@ -88,7 +123,7 @@ const fetchImages = (query) => {
         card.appendChild(cardBody);
 
         col.appendChild(card);
-
+        editBtn.addEventListener("click", () => col.remove());
         row.appendChild(col);
       });
     })
@@ -100,3 +135,8 @@ const fetchImages = (query) => {
 blueButton.addEventListener("click", () => fetchImages("seasides"));
 
 greyButton.addEventListener("click", () => fetchImages("flowers"));
+
+/* inputArea.onchange((e) => fetchImages(e.target.value)); */
+inputArea.onchange = function (e) {
+  fetchImages(e.target.value);
+};
